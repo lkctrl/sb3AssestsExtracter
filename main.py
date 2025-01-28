@@ -44,6 +44,9 @@ if __name__ == "__main__":
         print(f"Current costume: {Obj["costumes"][Obj["currentCostume"]]["name"]}")
 
         if Obj["isStage"]:#Stage
+            if len(Obj["costumes"]) == 0:
+                print(f"Stage {Obj["name"]} has no costume.")
+                continue
             os.makedirs(cos_output_path+"/"+sanitize_name(Obj["name"]), exist_ok=True)
             for cos in Obj["costumes"]:
                 src = os.path.join(extracted_path, cos["md5ext"])#./<sb3name>/<md5ext>
@@ -52,6 +55,9 @@ if __name__ == "__main__":
                 print(f"Processed: {src} to {dst}")
 
         else:#Sprite
+            if len(Obj["costumes"]) == 0:    
+                print(f"Sprite {Obj["name"]} has no costume.")
+                continue
             os.makedirs(cos_output_path+"/Sprites/"+sanitize_name(Obj["name"]), exist_ok=True)
             for cos in Obj["costumes"]:
                 src = os.path.join(extracted_path, cos["md5ext"])#./<sb3name>/<md5ext>
@@ -67,6 +73,9 @@ if __name__ == "__main__":
 
     for Obj in data["targets"]:
         print("----------"+Obj["name"]+"----------")
+        if len(Obj["sounds"]) == 0:
+            print(f"{Obj["name"]} has no sound.")
+            continue
         for sound in Obj["sounds"]:
             src = os.path.join(extracted_path, sound["md5ext"])#./<sb3name>/<md5ext>
             dst = os.path.join(waw_output_path, sanitize_name(sound["name"]).replace("?","_") + os.path.splitext(sound["md5ext"])[1])#./output/sounds/<sound name>.<ext>
