@@ -46,7 +46,7 @@ if __name__ == "__main__":
             os.makedirs(cos_output_path+"/"+sanitize_name(Obj["name"]), exist_ok=True)
             for cos in Obj["costumes"]:
                 src = os.path.join(extracted_path, cos["md5ext"])#./<sb3name>/<md5ext>
-                dst = os.path.join(cos_output_path, sanitize_name(Obj["name"]), sanitize_name(cos["name"]).replace("?","_") + os.path.splitext(cos["md5ext"])[1])#./output/costumes/<stage name>/<costume name>.<ext>
+                dst = os.path.join(cos_output_path, sanitize_name(Obj["name"]), sanitize_name(cos["name"]) + os.path.splitext(cos["md5ext"])[1])#./output/costumes/<stage name>/<costume name>.<ext>
                 shutil.copy(src, dst)
                 print(f"Processed: {src} to {dst}")
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
             os.makedirs(cos_output_path+"/Sprites/"+sanitize_name(Obj["name"]), exist_ok=True)
             for cos in Obj["costumes"]:
                 src = os.path.join(extracted_path, cos["md5ext"])#./<sb3name>/<md5ext>
-                dst = os.path.join(cos_output_path,"Sprites",sanitize_name(Obj["name"]), sanitize_name(cos["name"]).replace("?","_") + os.path.splitext(cos["md5ext"])[1])#./output/costumes/Sprite/<sprite name>/<costume name>.<ext>
+                dst = os.path.join(cos_output_path,"Sprites",sanitize_name(Obj["name"]), sanitize_name(cos["name"]) + os.path.splitext(cos["md5ext"])[1])#./output/costumes/Sprite/<sprite name>/<costume name>.<ext>
                 shutil.copy(src, dst)
                 print(f"Processed: {src} to {dst}")
     
@@ -72,8 +72,9 @@ if __name__ == "__main__":
         if len(Obj["sounds"]) == 0:
             print(f"{Obj["name"]} has no sound.")
             continue
+        os.makedirs(waw_output_path+"/"+sanitize_name(Obj["name"]), exist_ok=True)
         for sound in Obj["sounds"]:
             src = os.path.join(extracted_path, sound["md5ext"])#./<sb3name>/<md5ext>
-            dst = os.path.join(waw_output_path, sanitize_name(sound["name"]).replace("?","_") + os.path.splitext(sound["md5ext"])[1])#./output/sounds/<sound name>.<ext>
+            dst = os.path.join(waw_output_path,sanitize_name(Obj["name"]), sanitize_name(sound["name"]) + os.path.splitext(sound["md5ext"])[1])#./output/sounds/<sound name>.<ext>
             shutil.copy(src, dst)
             print(f"Processed: {src} to {dst}")
