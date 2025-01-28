@@ -3,15 +3,11 @@ import shutil
 import zipfile
 import json
 
-# def copy_and_rename_file(src, dst):
-#     shutil.copy(src, dst)
-#     print(f"Copied and renamed file from {src} to {dst}")
-
 def extract_zip(zip_path)->str:
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(zip_path.replace(zip_path.split(".")[1], ""))
+        zip_ref.extractall(zip_path.replace(".sb3", ""))
     print(f"Extracted {zip_path}.")
-    return zip_path.replace(zip_path.split(".")[1], "")
+    return zip_path.replace(".sb3", "")
 
 dangerous_chars = ["?", ":", "*", "<", ">", "|", "\\", "/"]
 def sanitize_name(name: str) -> str:
